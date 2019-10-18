@@ -9,26 +9,33 @@ We would like to know if this bias is evident at the children’s sports level. 
 This project contains two phases, the first is data collection and cleaning and the second phase is data interpretation and testing for bias. The minimum data required for bias testing includes a diver identifier, their associated team, their score from each judge/coach with the judge identified, and the coach’s team. The meets we will look at are the advancement meets, which are the regional and zone meets. There are 12 regions and 6 zones in the USA resulting in 18 meets a year to be considered. Three years will be looked at, 2016, 2017, and 2018 resulting in 54 meets. This can all be queried on the divemeets.com page but there would be a query for each meet to get the list of results, then select the results category (age, gender, and board-1M, 3M, platform) – 24 categories, then select the score for a diver from that category – most have 30-40 divers, this shows a list of the dives where you then select the score for the individual dive which shows the judges names and the scores they gave, you then select the judge’s name and it shows the club they are with. The data is all there but it is on so many different pages that it would take a huge number of hours to pull it all together. The 2018 region 5 meet had 219 divers who competed in 509 events completing 4023 dives and obtaining 17752 scores. The following set of images shows the progression through the pages to gather the required information.<br><br>
 
 Meet choices – select results under the meet:<br>
-![](image1)
+
+![](image1.png)
  
 Some of the events – select each one:<br>
-![](image2)
+
+![](image2.png)
 
 The results for one of the categories – select the score for a diver:<br>
-![](image3)
+
+![](image3.png)
 
 The scoring results for this diver for this event – select the score for each dive:<br>
-![](image4)
+
+![](image4.png)
 
 The scores for the individual dive and the judges giving that score – <br>
-![](image5)
+
+![](image5.png)
 
 If on the page above, we select “all Scores for this Event” we can get the scores for each dive:<br>
-![](image6)
+
+![](image6.png)
 
 Selecting the “All Divers Scores for this Event” produces a page with the above format for each diver competing in the event. Extracting information from this page would shorten the process considerably. <br><br>
 Selecting a judge’s name from the above pages gives the judge’s profile which includes the USA diving team with which the judge is affiliated.<br><br>
-![](image7)
+
+![](image7.png)
 
 The solution is to use web scraping to collect the information. Getting to the Results page shown above containing the scores for all divers in the event allows the collection of all the required except for the coach/judge name and team. All that is needed is a list of all the URLs for each of the results pages for each event in each meet. If all 24 events were competed at each of the 54 meets, there would be 1,296 URL’s in the list to be scraped.<br><br>
 The URL’s were gathered for each of the results pages for each event in each meet resulting in the collection of 1178 URL’s since not all events were contested at each meet. It was discovered that there was a pattern to the URL’s making the building of the list easier. The URL looks like the following:<br>
@@ -39,22 +46,27 @@ The first set of code was generated to collect the information from the scraped 
 The gathering of the judge/coach names and team affiliation was the next set of information needed. The file created in the first step was opened as an excel file, renamed, all columns deleted except for the judge/coach name, and sorted for unique names. The judge names entered as “Judge” or “Unknown” or “Unattached” or any other substitution for an actual name were deleted. The remaining judge/coach names were all looked up by hand, the team affiliation was entered into the excel file, and the file was saved. There was one difficulty where there were two judges listed in the scoring file with the same first and last name but a different middle initial. The dive meets coach/judge information pages did not contain the middle initial. The team websites for the two teams for those coaches were searched to try to find which coach went with which team. The correct assignment was finally determined upon finding that one coach had an email address containing his middle initial. There was a total of 457 named judges with 27 unattached and 60 unknown, leaving 380 judges with known affiliations.<br><br>
 The team affiliation for the judge/coach now needs to be checked against the team affiliation for the diver to determine of the diver and judge are from the same team or a different team. There is also a third category of unknown affiliation when the judge is not named or listed as unattached or unknown, or the diver is listed as unattached. In these cases, there is likely some level of affiliation with a team, but it cannot be determined from the provided information. The diver’s team needs to be compared to the judge/coach team and a flag should be set indicating if the diver and judge teams match (1), are different (0), or are unknown (2). <br><br>
 The first thing needed is to separate the diver name from the diver team name. There is a dash between the names, so it is easy to just split the field on this, except one of the divers had a hyphenated last name. The delimitator just needed to be redefined to include a space on either side of the dash. This resolved the issue. Now the data file looked like this:<br>
-![](image8)
+
+![](image8.png)
  
 Each line of the file was checked and if there was a valid judge name and the diver had a team name, the judge name was searched in the judge file and when found, the judge team was compared to the diver team. If the teams matched, the flag was set to 1, if the teams did not match, the flag was set to 0, and if there was no team listed for the judge/coach or the diver, the flag was set to 2. The data file now looked like this:<br>
-![](image9)
 
-The following contains information regarding some of the information that will be used for the bias analysis:<br><br>
-total records:	  226557<br>
-matching rows:  	  0   172837 – non-matching team<br>
-			  2    37785 – diver or coach team unknown<br>
-			  1    15935 – diver and coach team match<br>
-Name: same, dtype: int64<br>
+![](image9.png)
+
+The following contains counts for some of the information that will be used for the bias analysis:<br><br>
+total records:	  226557     - how many records in the final file<br>
+Total scores:  	  839842     - how many scores were recorded<br><br>
 unique meets:  	  54         - how many meet results in file<br>
-unique divers:  	  3572	     - different divers in file<br>
+unique divers:    3572	     - different divers in file<br>
 unique teams:  	  207	     - different teams in file<br>
 unique judges:     473	     - different judges in file<br>
-Total scores:  	  839842     - how many scores were recorded<br><br>
+Total scores:  	  839842     - how many scores were recorded<br>
+matching rows:  	 
+* 0  = 172837 – non-matching team
+* 1  =  15935 – diver and coach team match
+* 2  =  37785 – diver or coach team unknown
+Name: same, dtype: int64<br><br>
+
 
 The counts for the unique teams and judges includes “Unattached” and “Unknown” as well as other values filled in by meet personnel when the actual judge or team name is missing. The variables for the final output file are as follows:<br><br>
 * meet – character: name of the meet<br>
