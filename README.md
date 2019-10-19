@@ -1,4 +1,4 @@
-### **Data COllection (Part 1) to Test for Bias in Junior Diving Scores (Part 2)**
+### **Data Collection (Part 1) to Test for Bias in Junior Diving Scores (Part 2)**
 #### **Background:**
 Many times, people sit in the stands, on the side lines, or in front of their TV watching a game, competition, or meet and think that a referee, official, or judge may have been biased in their calls or scores. Is it true? Are the officiants biased or are we just seeing things from our own biased view point? <br><br>
 Bias can be very difficult to uncover. Two athletes behaving or performing in the same manner could have different outcomes. Is this really the result of bias or did the officiant legitimately not observe something from one athlete that was seen in the other, maybe because they were looking in a different direction? Improvements in technology has aided the analysis for many of these types of situations and allows some errant calls to be corrected, but still, the question persists.<br><br>
