@@ -67,7 +67,7 @@ matching rows:
 * 2  =  37785 – diver or coach team unknown
 Name: same, dtype: int64<br><br>
 
-The results show a very unbalanced count of records where the diver and judge/coach teams are the same verses when the teams are different or one team is unknown. This was actually expected and the unbance needs to be considered during the data analysis.<br><br>
+The results show a very unbalanced count of records where the diver and judge/coach teams are the same verses when the teams are different or one team is unknown. This was actually expected and the unbalance needs to be considered during the data analysis.<br><br>
 
 The counts for the unique teams and judges includes “Unattached” and “Unknown” as well as other values filled in by meet personnel when the actual judge or team name is missing. The variables for the final output file **divemeets_final_data.csv** are as follows:<br><br>
 * meet – character: name of the meet<br>
