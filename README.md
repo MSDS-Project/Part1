@@ -12,23 +12,23 @@ Meet choices – select results under the meet:<br>
 
 ![](image1.png)
  
-Some of the events – select each one:<br>
+Selecting results under the 2018 Region 5 meet produces a list of events competed at the meet. The snip below shows some of the events. Each one will need to be selected.<br>
 
 ![](image2.png)
 
-The results for one of the categories – select the score for a diver:<br>
+This shows the results when the 16-18 girls 3m event is selected. You can then select the score for a diver.<br>
 
 ![](image3.png)
 
-The scoring results for this diver for this event – select the score for each dive:<br>
+This shows the scoring results of each dive for this diver for this event. You then select the score for one of the dives.<br>
 
 ![](image4.png)
 
-The scores for the individual dive and the judges giving that score – <br>
+This shows the scores for the individual dive and the judges giving that score. <br>
 
 ![](image5.png)
 
-If on the page above, we select “all Scores for this Event” we can get the scores for each dive:<br>
+If on the page above, we select “All Scores for this Event” shown at the bottom of the page, we can get all the scores for each dive.<br>
 
 ![](image6.png)
 
